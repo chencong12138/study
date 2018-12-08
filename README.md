@@ -13,3 +13,9 @@ h5 php
 - git add . 当前文前仓库状态
 - git commit -m "string" 提交备注
 - git push 本地上传到git服务器
+
+## git密钥生成
+- ssh-keygen.exe生成公私密钥
+- ~/.ssh
+- id_rsa  id_rsa.pub
+- C:\Users\陈聪\.ssh
