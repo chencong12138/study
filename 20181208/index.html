@@ -9,18 +9,44 @@
 </head>
 
 <body>
-    <div id="todoList">
+    <div id="app">
         <ul>
-            <li>学习</li>
-            <li>吃饭</li>
-            <li>睡觉</li>
+            <li v-for='item in items':key='item.id'>{{item.content}}<button @click='del(item.id)'>删除</button></li>
         </ul>
         <div>
-            <input type="text">
-            <button type="submit">提交</button>
+            <input v-model='newAddItem'>
+            <button type="submit" @click='add'>添加</button>
         </div>
     </div>
     <script src="/20181208/js/vue.js"></script>
+    <script>
+        let id=1
+        let vm = new Vue ({
+            el:'#app',
+            data:{
+                items:[],
+                newAddItem:''
+            },
+            methods:{
+                add:function(){
+                    this.items.push({
+                        id:id++,
+                        content:this.newAddItem
+                    });
+                },
+                del:function(id){
+                    const newItems=[];
+                    for (let index = 0; index < this.items.length; index++) {
+                        const currentItem = this.items[index]
+                         if (currentItem.id!=id) {
+                             newItems.push(currentItem)
+                         }
+                    }
+                    this.items=newItems;
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>
