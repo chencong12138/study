@@ -22,3 +22,6 @@ h5 php
 
 ## 从git下载一个项目
 - git clone (adress) 下载到本地
+
+## 搭建本地服务器
+- 通过Visual Studio Code PHP指令：php -S (局域网IP地址)：8000 搭建
