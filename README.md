@@ -8,7 +8,7 @@ h5 php
 - git-scm.com
 
 ## git命令行常用操作
-- git in件添加进git库
+- git init 添加文件进git库
 - git status 查看当it 创建git库
 - git add . 当前文前仓库状态
 - git commit -m "string" 提交备注

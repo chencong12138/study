@@ -6,43 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            font-family: serif;
+            font-size: 1em;
+            text-align: center;
+        }
+        #app {
+            width: 1000px;
+            height: 2000px;
+            margin: 0 auto;
+        }
+        .left {
+            float: left;
+            width: 600px;
+            height: 100%;
+            text-align: left;
+            background-color: yellow;
+        }
+        .left>ul {
+            list-style-type: none
+        }
+        .left>ul>li {
+            margin-top: 40px;
+            margin-left: 40px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .right {
+            float: right;
+            width: 400px;
+            height: 100%;
+            text-align: center;
+            background-color:blue;
+        }
+        .input {
+            margin-top: 200px;
+            font-size: 1.5em;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <ul>
-            <li v-for='item in items':key='item.id'>{{item.content}}<button @click='del(item.id)'>删除</button></li>
-        </ul>
-        <div>
-            <input v-model='newAddItem'>
-            <button type="submit" @click='add'>添加</button>
+        <h1>Todo List</h1>
+        <div class="left">
+            <ul>
+                <li v-for='item in items' :key='item.id'>{{item.todo}}<button @click='del(item.id)'>删除</button></li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="input">
+                <input v-model='newAddItem'>
+                <button type="submit" @click='add'>添加</button>
+            </div>
         </div>
     </div>
     <script src="/20181208/js/vue.js"></script>
+    <script src="/20181208/js/axios.js"></script>
     <script>
-        let id=1
-        let vm = new Vue ({
-            el:'#app',
-            data:{
-                items:[],
-                newAddItem:''
+        let id = 1
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                items: [],
+                newAddItem: ''
             },
-            methods:{
-                add:function(){
+            mounted() {
+                axios.get('/20181208/php/query.php').then(({data})=>{
+                    this.items = data
+                })
+            },
+            methods: {
+                add: function () {
                     this.items.push({
-                        id:id++,
-                        content:this.newAddItem
-                    });
+                        id: id++,
+                        todo: this.newAddItem
+                    })
                 },
-                del:function(id){
-                    const newItems=[];
+                del: function (id) {
+                    const newItems = []
                     for (let index = 0; index < this.items.length; index++) {
-                        const currentItem = this.items[index]
-                         if (currentItem.id!=id) {
-                             newItems.push(currentItem)
-                         }
+                        if (this.items[index].id != id) {
+                            newItems.push(this.items[index])
+                        }
                     }
-                    this.items=newItems;
+                    this.items = newItems
+                    axios.get('/20181208/php/del.php?id='+id)
                 }
             }
         })
