@@ -19,3 +19,6 @@ h5 php
 - ~/.ssh
 - id_rsa  id_rsa.pub
 - C:\Users\陈聪\.ssh
+
+## 从git下载一个项目
+- git clone (adress) 下载到本地
