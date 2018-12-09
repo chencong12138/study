@@ -56,7 +56,11 @@
         <h1>Todo List</h1>
         <div class="left">
             <ul>
-                <li v-for='item in items' :key='item.id'>{{item.todo}}<button @click='del(item.id)'>删除</button></li>
+                <li v-for='item in items' :key='item.id'>
+                    {{item.todo}}
+                    <button @click='del(item.id)'>删除</button>
+                    <button @click='update(item)'>修改</button>
+                </li>
             </ul>
         </div>
         <div class="right">
@@ -77,14 +81,13 @@
                 newAddItem: ''
             },
             mounted() {
-                axios.get('/20181208/php/query.php').then(({data})=>{
+                axios.get('/20181208/php/query.php').then(({ data }) => {
                     this.items = data
                 })
             },
             methods: {
                 add: function () {
-                    axios.get('/20181208/php/insert.php?todo='+this.newAddItem).then(res=>{
-                        console.log(res)
+                    axios.get('/20181208/php/insert.php?todo=' + this.newAddItem).then(res => {
                         this.items.push({
                             id: res.data.id,
                             todo: this.newAddItem
@@ -99,7 +102,12 @@
                         }
                     }
                     this.items = newItems
-                    axios.get('/20181208/php/del.php?id='+id)
+                    axios.get('/20181208/php/del.php?id=' + id)
+                },
+                update:function (item) {
+                    item.todo = prompt('你想修改成什么?')
+                    axios.get('/20181208/php/update.php?id='+item.id+'&todo='+item.todo)
+                    console.log(item)
                 }
             }
         })
