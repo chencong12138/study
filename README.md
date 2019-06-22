@@ -62,5 +62,84 @@ h5 php
 > rm filename //普通文件删除
 > rm -r dir //删除目录(无视层次),需要-r参数
 > rm -rf 文件 //recursive force递归强制删除文件,需要权限
+### 文件操作
+- 查看文件内容
+> cat filename //在终端中显示出来
+> more filename //通过敲回车一行一行看
+> less filename // 通过上下左右查看文件每一行
+> head -n filename //查看文件前n行内容
+> tail -n filename //查看文件后几行内容 
+> wc filename //计算文件行数
+- 创建文件
+> touch filename 
+> touch dir/filename
+- 追加文件内容
+> echo 内容 > filename //给文件纯覆盖写追加内容
+> echo 内容 >> filename //给文件追加内容
+### 用户和组的操作
+#### 用户操作user,配置文件为/etc/passwd
+- 创建 add
+> uesradd username //创建用户的同时创建同名组
+> useradd -g 组编号 username //创建用户同时设置组别
+> astraddle -g 组编号 -u 用户编号 -d 家目录 username //创建用户同时,指定组,用户编号,家目录
+- 修改 modify
+> usermod -g gid username //修改组别编号
+> usermode -g gid -u uid -d 家目录 -l newname username// 同时修改组别,用户编号,家目录,用户名
+- 删除 delete
+> userdel username //只删除passwd文件下用户信息,不包括家目录
+> userdel -r username //用户信息家目录同时删除
+- 给用户设置密码
+> passwd username
+#### 组别操作group,配置文件为/etc/group
+- 创建add
+> groupadd groupname
+- 修改 modify
+> groupmod -g gid -n newname groupname
+- 删除deleta
+> groupdel groupname //只有空组(内部没有用户信息)可以删除
+### vim
+- 命令模式>>>编辑模式又称插入模式或insert模式(四种方法a,i,o,s)
+> a //光标向后移动一位
+> i //光标和内容没有变化进入
+> o //新起一个空白行
+> s //删除光标所在字符
+- 尾行模式
+> :q //quit退出编辑器
+> :w //write单独保存
+> :q! //强制退出不保存
+> :wq! //强制进行保存修改
+> :set number or set nu //给编辑器设置行号
+> :set nonumber or set nonu //取消编辑器行号设置
+> :数字 //光标跳转到数字所在行头
+> :/内容/ 或/内容 //内容查找
+- 命令模式(光标操作)
+- 字符级:上(k) 下(j) 左(h) 右(l)
+- 单词级:word下个单词首字母(w);end下个单词尾字母(e);before上个单词首字母(b)
+- 行级:行首(0);行尾($)
+- 段落级:上个段落首部({)；下个段落首部(})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
