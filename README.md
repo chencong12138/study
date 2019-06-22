@@ -52,4 +52,15 @@ h5 php
 > mkdir 目录名称 
 > mkdir -p 目录名称1/目录名称2 //递归关系创建目录
 - 移动(改名字)目录 move
+> mv dir1 dir2//把dir1移动到dir2
+> mv dir1 dir2/newdir //把dir1移动到dir2并且改名为newdir
+- 复制目录copy
+> cp file1 dir1 //file1被复制一份到dir1目录下
+> cp -r dir1 dir2 //dir1目录被复制到dir2目录下一份
+> 目录复制需要-r这个参数
+- 删除remove
+> rm filename //普通文件删除
+> rm -r dir //删除目录(无视层次),需要-r参数
+> rm -rf 文件 //recursive force递归强制删除文件,需要权限
+
 
